@@ -58,9 +58,8 @@
     <p class="titulo">PEDIDO: <span id="pedido"></span></p>
     <p class="titulo">CLIENTE: <span id="n_cliente"></span></p>
     <p class="titulo">MESA: <span id="mesa"></span></p>
-      <p class="info"><strong>Fecha:</strong> <span id="fecha"></span> <span id="hora"></span></p>
+    <p class="info"><strong>Fecha:</strong> <span id="fecha"></span> <span id="hora"></span></p>
 
-    
     <table>
         <tr>
             <th>Cant</th>
@@ -77,7 +76,7 @@
     <p class="info"><strong>Costo del Domicilio:</strong> $<span id="domi"></span></p>
     <p class="info"><strong>Dirección:</strong> <span id="direccion"></span></p>
     
-       <p class="titulo">CONTACTOS:</p>
+    <p class="titulo">CONTACTOS:</p>
     <p class="info">QUINTA LA LUPITA</p>
     <p class="info">0988115001</p>
     <p class="info">Síguenos en redes sociales como Quinta la Lupita</p>
@@ -88,13 +87,11 @@
         document.getElementById("mesa").innerText = urlParams.get("mesa") || "N/A";
         document.getElementById("n_cliente").innerText = urlParams.get("n_cliente") || "N/A";
         document.getElementById("fecha").innerText = urlParams.get("fecha") || "N/A";
+        document.getElementById("hora").innerText = urlParams.get("hora") || "";
         document.getElementById("total").innerText = urlParams.get("total") || "N/A";
         document.getElementById("efectivo").innerText = urlParams.get("descuento") || "N/A";
         document.getElementById("devueltas").innerText = urlParams.get("subtotal_desc") || "N/A";
-        document.getElementById("descuento").innerText = urlParams.get("descuento") || "N/A";
-        document.getElementById("subtotal_desc").innerText = urlParams.get("subtotal_desc") || "N/A";
         document.getElementById("estado").innerText = urlParams.get("estado") || "N/A";
-        document.getElementById("fecha_entrega").innerText = urlParams.get("fecha_entrega") || "N/A";
         document.getElementById("domi").innerText = urlParams.get("domi") || "N/A";
         document.getElementById("direccion").innerText = urlParams.get("direccion") || "N/A";
         
@@ -106,13 +103,15 @@
             
             tableBody.innerHTML = "";
             for (let i = 0; i < cantidadesArray.length; i++) {
-                let row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${cantidadesArray[i].trim()}</td>
-                    <td>${serviciosArray[i].trim()}</td>
-                    <td>$${preciosArray[i].trim()}</td>
-                `;
-                tableBody.appendChild(row);
+                if (cantidadesArray[i] && serviciosArray[i] && preciosArray[i]) {
+                    let row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${cantidadesArray[i].trim()}</td>
+                        <td>${serviciosArray[i].trim()}</td>
+                        <td>$${preciosArray[i].trim()}</td>
+                    `;
+                    tableBody.appendChild(row);
+                }
             }
         }
         
