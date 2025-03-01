@@ -53,12 +53,11 @@
     </style>
 </head>
 <body>
-    <img class="logo" src="https://raw.githubusercontent.com/CRISALE420/FACTURAS-LALUPITA/refs/heads/main/LOGO-LUPITA.jpeg" alt="Logo Quinta La Lupita">
+    <img class="logo" src="logo.png" alt="Logo">
     <p class="info"><strong>NIT:</strong> Domicilios 304 4430427 / Mistares Etapa 2 Frente Bourbon</p>
-   <p class="titulo">PEDIDO: <span id="pedido"></span></p>
-<p class="titulo">MESA: <span id="mesa"></span></p>
-    <p class="titulo" id="pedido"></p>
-    <p class="titulo" id="mesa"></p>
+    <p class="titulo">TICKET: <span id="pedido"></span></p>
+    <p class="titulo">MESA: <span id="mesa"></span></p>
+    <p class="info"><strong>Cliente:</strong> <span id="n_cliente"></span></p>
     <p class="info"><strong>Fecha de Recepción:</strong> <span id="fecha"></span></p>
     
     <table>
@@ -90,6 +89,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         document.getElementById("pedido").innerText = urlParams.get("pedido") || "N/A";
         document.getElementById("mesa").innerText = urlParams.get("mesa") || "N/A";
+        document.getElementById("n_cliente").innerText = urlParams.get("n_cliente") || "N/A";
         document.getElementById("fecha").innerText = urlParams.get("fecha") || "N/A";
         document.getElementById("total").innerText = urlParams.get("total") || "N/A";
         document.getElementById("efectivo").innerText = urlParams.get("descuento") || "N/A";
@@ -123,4 +123,3 @@
     </script>
 </body>
 </html>
-
