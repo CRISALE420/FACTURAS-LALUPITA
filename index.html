@@ -53,7 +53,7 @@
     </style>
 </head>
 <body>
-   <img class="logo" src="https://raw.githubusercontent.com/CRISALE420/FACTURAS-LALUPITA/refs/heads/main/LOGO-LUPITA.jpeg" alt="Logo Quinta La Lupita">
+    <img class="logo" src="logo.png" alt="Logo">
     <p class="info"><strong>NIT:</strong> Domicilios 304 4430427 / Mistares Etapa 2 Frente Bourbon</p>
     <p class="titulo">TICKET:</p>
     <p class="titulo" id="pedido"></p>
@@ -72,6 +72,12 @@
     <p class="importe"><strong>EFECTIVO:</strong> $<span id="efectivo"></span></p>
     <p class="importe"><strong>TOTAL:</strong> $<span id="total"></span></p>
     <p class="importe"><strong>DEVUELTAS:</strong> $<span id="devueltas"></span></p>
+    <p class="info"><strong>Descuento:</strong> <span id="descuento"></span></p>
+    <p class="info"><strong>Subtotal Desc:</strong> <span id="subtotal_desc"></span></p>
+    <p class="info"><strong>Estado:</strong> <span id="estado"></span></p>
+    <p class="info"><strong>Fecha de Entrega:</strong> <span id="fecha_entrega"></span></p>
+    <p class="info"><strong>Costo del Domicilio:</strong> $<span id="domi"></span></p>
+    <p class="info"><strong>Dirección:</strong> <span id="direccion"></span></p>
     
     <p class="titulo">EN EL CARRITO</p>
     <p class="titulo">IMPORTANTE:</p>
@@ -85,8 +91,14 @@
         document.getElementById("mesa").innerText = urlParams.get("mesa") || "N/A";
         document.getElementById("fecha").innerText = urlParams.get("fecha") || "N/A";
         document.getElementById("total").innerText = urlParams.get("total") || "N/A";
-        document.getElementById("efectivo").innerText = urlParams.get("efectivo") || "N/A";
-        document.getElementById("devueltas").innerText = urlParams.get("devueltas") || "N/A";
+        document.getElementById("efectivo").innerText = urlParams.get("descuento") || "N/A";
+        document.getElementById("devueltas").innerText = urlParams.get("subtotal_desc") || "N/A";
+        document.getElementById("descuento").innerText = urlParams.get("descuento") || "N/A";
+        document.getElementById("subtotal_desc").innerText = urlParams.get("subtotal_desc") || "N/A";
+        document.getElementById("estado").innerText = urlParams.get("estado") || "N/A";
+        document.getElementById("fecha_entrega").innerText = urlParams.get("fecha_entrega") || "N/A";
+        document.getElementById("domi").innerText = urlParams.get("domi") || "N/A";
+        document.getElementById("direccion").innerText = urlParams.get("direccion") || "N/A";
         
         function populateTable(elementId, cantidades, servicios, precios) {
             let tableBody = document.getElementById(elementId);
