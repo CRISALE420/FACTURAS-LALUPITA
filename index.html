@@ -7,15 +7,15 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            width: 300px;
+            width: 250px;
             margin: auto;
-            padding: 20px;
+            padding: 10px;
             text-align: center;
             border: 1px solid #000;
-            border-radius: 10px;
+            border-radius: 5px;
         }
         .logo {
-            max-width: 100px;
+            max-width: 80px;
             display: block;
             margin: auto;
         }
@@ -23,50 +23,90 @@
             padding: 10px;
         }
         .info {
-            font-size: 14px;
+            font-size: 12px;
             margin-bottom: 5px;
         }
         .detalle {
             border-top: 1px solid black;
             padding-top: 10px;
-            font-size: 14px;
+            font-size: 12px;
             text-align: left;
         }
         .importe {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: bold;
+        }
+        .titulo {
+            font-weight: bold;
+            font-size: 14px;
+        }
+        table {
+            width: 100%;
+            font-size: 12px;
+            border-collapse: collapse;
+        }
+        th, td {
+            border-bottom: 1px solid black;
+            padding: 5px;
+            text-align: left;
         }
     </style>
 </head>
 <body>
-    <img class="logo" src="https://raw.githubusercontent.com/CRISALE420/FACTURAS-LALUPITA/refs/heads/main/LOGO-LUPITA.jpeg" alt="Logo Quinta La Lupita">
-    <h2>TICKET</h2>
-    <p class="info"><strong>Mesa:</strong> <span id="mesa"></span></p>
-    <p class="info"><strong>Fecha:</strong> <span id="fecha"></span></p>
-    <p class="info"><strong>Cantidades:</strong> <span id="cantidades"></span></p>
-    <p class="info"><strong>Servicios:</strong> <span id="servicios"></span></p>
-    <p class="info"><strong>Precio Unitario:</strong> <span id="p_unit"></span></p>
-    <p class="info"><strong>Total:</strong> <span id="total"></span></p>
-    <p class="info"><strong>Descuento:</strong> <span id="descuento"></span></p>
-    <p class="info"><strong>Subtotal Desc:</strong> <span id="subtotal_desc"></span></p>
-    <p class="info"><strong>Estado:</strong> <span id="estado"></span></p>
-    <p class="info"><strong>Fecha Entrega:</strong> <span id="fecha_entrega"></span></p>
-    <p class="info"><strong>Costo del Domicilio:</strong> <span id="domi"></span></p>
-    <p class="info"><strong>Dirección:</strong> <span id="direccion"></span></p>
+    <img class="logo" src="logo.png" alt="Logo">
+    <p class="info"><strong>NIT:</strong> Domicilios 304 4430427 / Mistares Etapa 2 Frente Bourbon</p>
+    <p class="titulo">TICKET:</p>
+    <p class="titulo" id="pedido"></p>
+    <p class="titulo" id="mesa"></p>
+    <p class="info"><strong>Fecha de Recepción:</strong> <span id="fecha"></span></p>
+    
+    <table>
+        <tr>
+            <th>Cant</th>
+            <th>Descripción</th>
+            <th>Total</th>
+        </tr>
+        <tbody id="detalle"></tbody>
+    </table>
+    
+    <p class="importe"><strong>EFECTIVO:</strong> $<span id="efectivo"></span></p>
+    <p class="importe"><strong>TOTAL:</strong> $<span id="total"></span></p>
+    <p class="importe"><strong>DEVUELTAS:</strong> $<span id="devueltas"></span></p>
+    
+    <p class="titulo">EN EL CARRITO</p>
+    <p class="titulo">IMPORTANTE:</p>
+    <p class="info">Facturas AutoSystem</p>
+    <p class="info">Contactos: +57 315 820 8619</p>
+    <p class="info">Síguenos en redes sociales como @AutoSystem</p>
+    
     <script>
         const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById("pedido").innerText = urlParams.get("pedido") || "N/A";
         document.getElementById("mesa").innerText = urlParams.get("mesa") || "N/A";
         document.getElementById("fecha").innerText = urlParams.get("fecha") || "N/A";
-        document.getElementById("cantidades").innerText = urlParams.get("cantidades") || "N/A";
-        document.getElementById("servicios").innerText = urlParams.get("servicios") || "N/A";
-        document.getElementById("p_unit").innerText = urlParams.get("p_unit") || "N/A";
         document.getElementById("total").innerText = urlParams.get("total") || "N/A";
-        document.getElementById("descuento").innerText = urlParams.get("descuento") || "N/A";
-        document.getElementById("subtotal_desc").innerText = urlParams.get("subtotal_desc") || "N/A";
-        document.getElementById("estado").innerText = urlParams.get("estado") || "N/A";
-        document.getElementById("fecha_entrega").innerText = urlParams.get("fecha_entrega") || "N/A";
-        document.getElementById("domi").innerText = urlParams.get("domi") || "N/A";
-        document.getElementById("direccion").innerText = urlParams.get("direccion") || "N/A";
+        document.getElementById("efectivo").innerText = urlParams.get("efectivo") || "N/A";
+        document.getElementById("devueltas").innerText = urlParams.get("devueltas") || "N/A";
+        
+        function populateTable(elementId, cantidades, servicios, precios) {
+            let tableBody = document.getElementById(elementId);
+            let cantidadesArray = cantidades ? cantidades.split(",") : [];
+            let serviciosArray = servicios ? servicios.split(",") : [];
+            let preciosArray = precios ? precios.split(",") : [];
+            
+            tableBody.innerHTML = "";
+            for (let i = 0; i < cantidadesArray.length; i++) {
+                let row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${cantidadesArray[i].trim()}</td>
+                    <td>${serviciosArray[i].trim()}</td>
+                    <td>$${preciosArray[i].trim()}</td>
+                `;
+                tableBody.appendChild(row);
+            }
+        }
+        
+        populateTable("detalle", urlParams.get("cantidades"), urlParams.get("servicios"), urlParams.get("p_unit"));
     </script>
 </body>
 </html>
