@@ -41,30 +41,32 @@
 <body>
     <img class="logo" src="logo.png" alt="Logo">
     <h2>TICKET</h2>
-    <p class="info"><strong>NIT:</strong> Domicilios 304 4430427 / Mistares Etapa 2 Frente Bourbon</p>
+    <p class="info"><strong>Mesa:</strong> <span id="mesa"></span></p>
     <p class="info"><strong>Fecha:</strong> <span id="fecha"></span></p>
-    <p class="info"><strong>Cliente:</strong> <span id="cliente"></span></p>
-    <p class="info"><strong>Documento:</strong> <span id="documento"></span></p>
-    <div class="detalle">
-        <p><strong>Cant:</strong> <span id="cantidad"></span></p>
-        <p><strong>Descripción:</strong> <span id="descripcion"></span></p>
-        <p><strong>Total:</strong> $<span id="total"></span></p>
-    </div>
-    <p class="importe"><strong>Efectivo:</strong> $<span id="efectivo"></span></p>
-    <p class="importe"><strong>Devueltas:</strong> $<span id="devueltas"></span></p>
-    <p>--------------------</p>
-    <p class="info">IMPORTANTE</p>
-    <p class="info">Gracias por su compra</p>
+    <p class="info"><strong>Cantidades:</strong> <span id="cantidades"></span></p>
+    <p class="info"><strong>Servicios:</strong> <span id="servicios"></span></p>
+    <p class="info"><strong>Precio Unitario:</strong> <span id="p_unit"></span></p>
+    <p class="info"><strong>Total:</strong> <span id="total"></span></p>
+    <p class="info"><strong>Descuento:</strong> <span id="descuento"></span></p>
+    <p class="info"><strong>Subtotal Desc:</strong> <span id="subtotal_desc"></span></p>
+    <p class="info"><strong>Estado:</strong> <span id="estado"></span></p>
+    <p class="info"><strong>Fecha Entrega:</strong> <span id="fecha_entrega"></span></p>
+    <p class="info"><strong>Costo del Domicilio:</strong> <span id="domi"></span></p>
+    <p class="info"><strong>Dirección:</strong> <span id="direccion"></span></p>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById("mesa").innerText = urlParams.get("mesa") || "N/A";
         document.getElementById("fecha").innerText = urlParams.get("fecha") || "N/A";
-        document.getElementById("cliente").innerText = urlParams.get("cliente") || "N/A";
-        document.getElementById("documento").innerText = urlParams.get("documento") || "N/A";
-        document.getElementById("descripcion").innerText = urlParams.get("descripcion") || "N/A";
-        document.getElementById("cantidad").innerText = urlParams.get("cantidad") || "N/A";
+        document.getElementById("cantidades").innerText = urlParams.get("cantidades") || "N/A";
+        document.getElementById("servicios").innerText = urlParams.get("servicios") || "N/A";
+        document.getElementById("p_unit").innerText = urlParams.get("p_unit") || "N/A";
         document.getElementById("total").innerText = urlParams.get("total") || "N/A";
-        document.getElementById("efectivo").innerText = urlParams.get("efectivo") || "N/A";
-        document.getElementById("devueltas").innerText = urlParams.get("devueltas") || "N/A";
+        document.getElementById("descuento").innerText = urlParams.get("descuento") || "N/A";
+        document.getElementById("subtotal_desc").innerText = urlParams.get("subtotal_desc") || "N/A";
+        document.getElementById("estado").innerText = urlParams.get("estado") || "N/A";
+        document.getElementById("fecha_entrega").innerText = urlParams.get("fecha_entrega") || "N/A";
+        document.getElementById("domi").innerText = urlParams.get("domi") || "N/A";
+        document.getElementById("direccion").innerText = urlParams.get("direccion") || "N/A";
     </script>
 </body>
 </html>
