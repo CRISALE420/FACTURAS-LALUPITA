@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recibo de Pago</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            width: 300px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #000;
+            border-radius: 10px;
+        }
+        .logo {
+            max-width: 100px;
+            display: block;
+            margin: auto;
+        }
+        .recibo {
+            padding: 10px;
+        }
+        .info {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .detalle {
+            border-top: 1px solid black;
+            padding-top: 10px;
+            font-size: 14px;
+            text-align: left;
+        }
+        .importe {
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <img class="logo" src="logo.png" alt="Logo">
+    <h2>TICKET</h2>
+    <p class="info"><strong>NIT:</strong> Domicilios 304 4430427 / Mistares Etapa 2 Frente Bourbon</p>
+    <p class="info"><strong>Fecha:</strong> <span id="fecha"></span></p>
+    <p class="info"><strong>Cliente:</strong> <span id="cliente"></span></p>
+    <p class="info"><strong>Documento:</strong> <span id="documento"></span></p>
+    <div class="detalle">
+        <p><strong>Cant:</strong> <span id="cantidad"></span></p>
+        <p><strong>Descripción:</strong> <span id="descripcion"></span></p>
+        <p><strong>Total:</strong> $<span id="total"></span></p>
+    </div>
+    <p class="importe"><strong>Efectivo:</strong> $<span id="efectivo"></span></p>
+    <p class="importe"><strong>Devueltas:</strong> $<span id="devueltas"></span></p>
+    <p>--------------------</p>
+    <p class="info">IMPORTANTE</p>
+    <p class="info">Gracias por su compra</p>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById("fecha").innerText = urlParams.get("fecha") || "N/A";
+        document.getElementById("cliente").innerText = urlParams.get("cliente") || "N/A";
+        document.getElementById("documento").innerText = urlParams.get("documento") || "N/A";
+        document.getElementById("descripcion").innerText = urlParams.get("descripcion") || "N/A";
+        document.getElementById("cantidad").innerText = urlParams.get("cantidad") || "N/A";
+        document.getElementById("total").innerText = urlParams.get("total") || "N/A";
+        document.getElementById("efectivo").innerText = urlParams.get("efectivo") || "N/A";
+        document.getElementById("devueltas").innerText = urlParams.get("devueltas") || "N/A";
+    </script>
+</body>
+</html>
