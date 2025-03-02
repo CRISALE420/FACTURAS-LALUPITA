@@ -15,7 +15,7 @@
             border-radius: 5px;
         }
         .logo {
-            max-width: 200px;
+            max-width: 80px;
             display: block;
             margin: auto;
         }
@@ -47,15 +47,16 @@
         }
         th, td {
             border-bottom: 1px solid black;
-            padding: 1px;
+            padding: 5px;
             text-align: left;
         }
     </style>
 </head>
 <body>
-   <img class="logo" src="https://raw.githubusercontent.com/CRISALE420/FACTURAS-LALUPITA/beb378c6818e576e41eb4adac9477c4e30eb04ce/LOGO-LUPITA-BN.jpeg">
+   <img class="logo" src="https://raw.githubusercontent.com/CRISALE420/FACTURAS-LALUPITA/refs/heads/main/LOGO-LUPITA.jpeg" alt="Logo Quinta La Lupita">
     <p class="info"><strong>DIRECCIÓN:</strong> Quinta el Salado</p>
-    <p class="titulo">PEDIDO: <span id="pedido"></span></p>
+    <p class="titulo">PEDIDO:</p>
+    <p class="importe" style="font-size: 18px;"><strong><span id="pedido"></span></strong></p>
     <p class="titulo">CLIENTE: <span id="n_cliente"></span></p>
     <p class="titulo">MESA: <span id="mesa"></span></p>
     <p class="info"><strong>Fecha:</strong> <span id="fecha"></span> <span id="hora"></span></p>
@@ -69,17 +70,15 @@
         <tbody id="detalle"></tbody>
     </table>
     
-    <p class="importe"><strong>EFECTIVO:</strong> $<span id="efectivo"></span></p>
-    <p class="importe"><strong>TOTAL:</strong> $<span id="total"></span></p>
-    <p class="importe"><strong>VUELTO:</strong> $<span id="devueltas"></span></p>
-    <p class="info"><strong>Estado:</strong> <span id="estado"></span></p>
-    <p class="info"><strong>Costo del Domicilio:</strong> $<span id="domi"></span></p>
-    <p class="info"><strong>Dirección:</strong> <span id="direccion"></span></p>
+    <p class="importe" style="margin-bottom: 2px;"><strong>EFECTIVO:</strong> $<span id="efectivo"></span></p>
+    <p class="importe" style="margin-bottom: 2px;"><strong>TOTAL:</strong> $<span id="total"></span></p>
+    <p class="importe" style="margin-bottom: 2px;"><strong>VUELTO:</strong> $<span id="devueltas"></span></p>
+    <p class="importe" style="margin-bottom: 2px;"><strong>Estado:</strong> <span id="estado"></span></p>
+    <p class="importe" style="margin-bottom: 2px; display: none;" id="domi-container"><strong>Costo del Domicilio:</strong> $<span id="domi"></span></p>
+    <p class="info" style="display: none;" id="direccion-container"><strong>Dirección:</strong> <span id="direccion"></span></p>
     
     <p class="titulo">CONTACTOS:</p>
-    <p class="info">QUINTA LA LUPITA</p>
-    <p class="info">0988115001</p>
-    <p class="info">Síguenos en redes sociales como Quinta la Lupita</p>
+    <p class="info">QUINTA LA LUPITA | 0988115001 | Síguenos en redes sociales como Quinta la Lupita</p>
     
     <script>
         const urlParams = new URLSearchParams(window.location.search);
@@ -92,23 +91,31 @@
         document.getElementById("efectivo").innerText = urlParams.get("descuento") || "N/A";
         document.getElementById("devueltas").innerText = urlParams.get("subtotal_desc") || "N/A";
         document.getElementById("estado").innerText = urlParams.get("estado") || "N/A";
-        document.getElementById("domi").innerText = urlParams.get("domi") || "N/A";
-        document.getElementById("direccion").innerText = urlParams.get("direccion") || "N/A";
+        const domiValue = urlParams.get("domi");
+        if (domiValue && domiValue !== "N/A") {
+            document.getElementById("domi").innerText = domiValue;
+            document.getElementById("domi-container").style.display = "block";
+        }
+        const direccionValue = urlParams.get("direccion");
+        if (direccionValue && direccionValue !== "N/A") {
+            document.getElementById("direccion").innerText = direccionValue;
+            document.getElementById("direccion-container").style.display = "block";
+        }
         
         function populateTable(elementId, cantidades, servicios, precios) {
             let tableBody = document.getElementById(elementId);
-            let cantidadesArray = cantidades ? cantidades.split(",") : [];
-            let serviciosArray = servicios ? servicios.split(",") : [];
-            let preciosArray = precios ? precios.split(",") : [];
+            let cantidadesArray = cantidades ? cantidades.split(",").map(i => i.trim()) : [];
+            let serviciosArray = servicios ? servicios.split(",").map(i => i.trim()) : [];
+            let preciosArray = precios ? precios.split(",").map(i => i.trim()) : [];
             
             tableBody.innerHTML = "";
             for (let i = 0; i < cantidadesArray.length; i++) {
                 if (cantidadesArray[i] && serviciosArray[i] && preciosArray[i]) {
                     let row = document.createElement("tr");
                     row.innerHTML = `
-                        <td>${cantidadesArray[i].trim()}</td>
-                        <td>${serviciosArray[i].trim()}</td>
-                        <td>$${preciosArray[i].trim()}</td>
+                        <td>${cantidadesArray[i]}</td>
+                        <td>${serviciosArray[i]}</td>
+                        <td>$${preciosArray[i]}</td>
                     `;
                     tableBody.appendChild(row);
                 }
